@@ -114,6 +114,14 @@ button.link.danger {
   color: #b91c1c;
 }
 
+button.danger-btn {
+  background: #dc2626;
+}
+
+button.danger-btn:hover {
+  background: #b91c1c;
+}
+
 select {
   border-radius: 8px;
   border: 1px solid #d1d5db;
@@ -379,6 +387,71 @@ select {
   font-size: 0.9rem;
 }
 
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.stat-den {
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
+.stat-label {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.settings-group {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.settings-group h3 {
+  margin: 0 0 12px;
+}
+
+.settings-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+label.check {
+  cursor: pointer;
+}
+
+.row-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.msg {
+  margin: 12px 0 0;
+  color: #065f46;
+  word-break: break-all;
+}
+
 .error {
   color: #b91c1c;
   padding: 24px;
@@ -396,7 +469,9 @@ select {
   .lesson-list li,
   .kana-card,
   .panel,
-  .mistake-list li {
+  .mistake-list li,
+  .stat-card,
+  .settings-group {
     background: #1f2937;
     border-color: #374151;
   }
@@ -419,7 +494,9 @@ select {
   .muted,
   .kana-kata,
   .kana-note,
-  .mistake-a {
+  .mistake-a,
+  .stat-label,
+  .stat-den {
     color: #9ca3af;
   }
   .mark-row button,
@@ -431,5 +508,8 @@ select {
     background: #1f2937;
     color: #e5e7eb;
     border-color: #374151;
+  }
+  .msg {
+    color: #6ee7b7;
   }
 }

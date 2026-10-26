@@ -1,4 +1,11 @@
+let ttsEnabled = true;
+
+export function setTtsEnabled(v: boolean) {
+  ttsEnabled = v;
+}
+
 export function speakJapanese(text: string) {
+  if (!ttsEnabled) return;
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "ja-JP";
