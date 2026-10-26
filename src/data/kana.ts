@@ -27,6 +27,18 @@ export const chapters: ChapterDef[] = [
     title: "五十音（清音）",
     description: "日语入门第一步：46 个清音假名，每个音有平假名、片假名两种写法。",
   },
+  {
+    id: "ch-dakuon",
+    sort: 2,
+    title: "浊音・半浊音",
+    description: "在清音上加浊点（゛）或半浊点（゜）：が・ざ・だ・ば 与 ぱ 行。",
+  },
+  {
+    id: "ch-youon",
+    sort: 3,
+    title: "拗音",
+    description: "い段假名 + 小写 ゃ・ゅ・ょ 连读成的音，如 き＋ゃ＝きゃ。",
+  },
 ];
 
 export const lessons: LessonDef[] = [
@@ -114,6 +126,96 @@ export const lessons: LessonDef[] = [
       { hiragana: "わ", katakana: "ワ", romaji: "wa", note: "像「哇」" },
       { hiragana: "を", katakana: "ヲ", romaji: "wo", note: "作助词读「哦」，不单用" },
       { hiragana: "ん", katakana: "ン", romaji: "n", note: "鼻音「嗯」" },
+    ],
+  },
+  {
+    id: "l-ga", chapterId: "ch-dakuon", sort: 1, title: "が行", items: [
+      { hiragana: "が", katakana: "ガ", romaji: "ga", note: "か行＋浊点゛" },
+      { hiragana: "ぎ", katakana: "ギ", romaji: "gi", note: "か行＋浊点゛" },
+      { hiragana: "ぐ", katakana: "グ", romaji: "gu", note: "か行＋浊点゛" },
+      { hiragana: "げ", katakana: "ゲ", romaji: "ge", note: "か行＋浊点゛" },
+      { hiragana: "ご", katakana: "ゴ", romaji: "go", note: "か行＋浊点゛" },
+    ],
+  },
+  {
+    id: "l-za", chapterId: "ch-dakuon", sort: 2, title: "ざ行", items: [
+      { hiragana: "ざ", katakana: "ザ", romaji: "za", note: "さ行＋浊点゛" },
+      { hiragana: "じ", katakana: "ジ", romaji: "ji", note: "さ行＋浊点゛" },
+      { hiragana: "ず", katakana: "ズ", romaji: "zu", note: "さ行＋浊点゛" },
+      { hiragana: "ぜ", katakana: "ゼ", romaji: "ze", note: "さ行＋浊点゛" },
+      { hiragana: "ぞ", katakana: "ゾ", romaji: "zo", note: "さ行＋浊点゛" },
+    ],
+  },
+  {
+    id: "l-da", chapterId: "ch-dakuon", sort: 3, title: "だ行", items: [
+      { hiragana: "だ", katakana: "ダ", romaji: "da", note: "た行＋浊点゛" },
+      { hiragana: "ぢ", katakana: "ヂ", romaji: "ji", note: "た行＋浊点゛（与じ同音）" },
+      { hiragana: "づ", katakana: "ヅ", romaji: "zu", note: "た行＋浊点゛（与ず同音）" },
+      { hiragana: "で", katakana: "デ", romaji: "de", note: "た行＋浊点゛" },
+      { hiragana: "ど", katakana: "ド", romaji: "do", note: "た行＋浊点゛" },
+    ],
+  },
+  {
+    id: "l-ba", chapterId: "ch-dakuon", sort: 4, title: "ば行", items: [
+      { hiragana: "ば", katakana: "バ", romaji: "ba", note: "は行＋浊点゛" },
+      { hiragana: "び", katakana: "ビ", romaji: "bi", note: "は行＋浊点゛" },
+      { hiragana: "ぶ", katakana: "ブ", romaji: "bu", note: "は行＋浊点゛" },
+      { hiragana: "べ", katakana: "ベ", romaji: "be", note: "は行＋浊点゛" },
+      { hiragana: "ぼ", katakana: "ボ", romaji: "bo", note: "は行＋浊点゛" },
+    ],
+  },
+  {
+    id: "l-pa", chapterId: "ch-dakuon", sort: 5, title: "ぱ行（半浊音）", items: [
+      { hiragana: "ぱ", katakana: "パ", romaji: "pa", note: "は行＋半浊点゜" },
+      { hiragana: "ぴ", katakana: "ピ", romaji: "pi", note: "は行＋半浊点゜" },
+      { hiragana: "ぷ", katakana: "プ", romaji: "pu", note: "は行＋半浊点゜" },
+      { hiragana: "ぺ", katakana: "ペ", romaji: "pe", note: "は行＋半浊点゜" },
+      { hiragana: "ぽ", katakana: "ポ", romaji: "po", note: "は行＋半浊点゜" },
+    ],
+  },
+  {
+    id: "l-y1", chapterId: "ch-youon", sort: 1, title: "拗音①（きゃ〜ちょ）", items: [
+      { hiragana: "きゃ", katakana: "キャ", romaji: "kya", note: "き＋小ゃ" },
+      { hiragana: "きゅ", katakana: "キュ", romaji: "kyu", note: "き＋小ゅ" },
+      { hiragana: "きょ", katakana: "キョ", romaji: "kyo", note: "き＋小ょ" },
+      { hiragana: "しゃ", katakana: "シャ", romaji: "sha", note: "し＋小ゃ" },
+      { hiragana: "しゅ", katakana: "シュ", romaji: "shu", note: "し＋小ゅ" },
+      { hiragana: "しょ", katakana: "ショ", romaji: "sho", note: "し＋小ょ" },
+      { hiragana: "ちゃ", katakana: "チャ", romaji: "cha", note: "ち＋小ゃ" },
+      { hiragana: "ちゅ", katakana: "チュ", romaji: "chu", note: "ち＋小ゅ" },
+      { hiragana: "ちょ", katakana: "チョ", romaji: "cho", note: "ち＋小ょ" },
+    ],
+  },
+  {
+    id: "l-y2", chapterId: "ch-youon", sort: 2, title: "拗音②（にゃ〜りょ）", items: [
+      { hiragana: "にゃ", katakana: "ニャ", romaji: "nya", note: "に＋小ゃ" },
+      { hiragana: "にゅ", katakana: "ニュ", romaji: "nyu", note: "に＋小ゅ" },
+      { hiragana: "にょ", katakana: "ニョ", romaji: "nyo", note: "に＋小ょ" },
+      { hiragana: "ひゃ", katakana: "ヒャ", romaji: "hya", note: "ひ＋小ゃ" },
+      { hiragana: "ひゅ", katakana: "ヒュ", romaji: "hyu", note: "ひ＋小ゅ" },
+      { hiragana: "ひょ", katakana: "ヒョ", romaji: "hyo", note: "ひ＋小ょ" },
+      { hiragana: "みゃ", katakana: "ミャ", romaji: "mya", note: "み＋小ゃ" },
+      { hiragana: "みゅ", katakana: "ミュ", romaji: "myu", note: "み＋小ゅ" },
+      { hiragana: "みょ", katakana: "ミョ", romaji: "myo", note: "み＋小ょ" },
+      { hiragana: "りゃ", katakana: "リャ", romaji: "rya", note: "り＋小ゃ" },
+      { hiragana: "りゅ", katakana: "リュ", romaji: "ryu", note: "り＋小ゅ" },
+      { hiragana: "りょ", katakana: "リョ", romaji: "ryo", note: "り＋小ょ" },
+    ],
+  },
+  {
+    id: "l-y3", chapterId: "ch-youon", sort: 3, title: "拗音③（ぎゃ〜ぴょ）", items: [
+      { hiragana: "ぎゃ", katakana: "ギャ", romaji: "gya", note: "ぎ＋小ゃ" },
+      { hiragana: "ぎゅ", katakana: "ギュ", romaji: "gyu", note: "ぎ＋小ゅ" },
+      { hiragana: "ぎょ", katakana: "ギョ", romaji: "gyo", note: "ぎ＋小ょ" },
+      { hiragana: "じゃ", katakana: "ジャ", romaji: "ja", note: "じ＋小ゃ" },
+      { hiragana: "じゅ", katakana: "ジュ", romaji: "ju", note: "じ＋小ゅ" },
+      { hiragana: "じょ", katakana: "ジョ", romaji: "jo", note: "じ＋小ょ" },
+      { hiragana: "びゃ", katakana: "ビャ", romaji: "bya", note: "び＋小ゃ" },
+      { hiragana: "びゅ", katakana: "ビュ", romaji: "byu", note: "び＋小ゅ" },
+      { hiragana: "びょ", katakana: "ビョ", romaji: "byo", note: "び＋小ょ" },
+      { hiragana: "ぴゃ", katakana: "ピャ", romaji: "pya", note: "ぴ＋小ゃ" },
+      { hiragana: "ぴゅ", katakana: "ピュ", romaji: "pyu", note: "ぴ＋小ゅ" },
+      { hiragana: "ぴょ", katakana: "ピョ", romaji: "pyo", note: "ぴ＋小ょ" },
     ],
   },
 ];
