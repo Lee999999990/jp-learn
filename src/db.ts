@@ -1,5 +1,6 @@
 import Database from "@tauri-apps/plugin-sql";
 import { chapters, lessons } from "./data/kana";
+import type { QuizQuestion } from "./lib/quiz";
 
 let dbPromise: Promise<Database> | null = null;
 
@@ -36,6 +37,24 @@ export async function initDb(): Promise<void> {
        updated_at TEXT NOT NULL
      )`
   );
+  await db.execute(
+    `CREATE TABLE IF NOT EXISTS mistakes (
+       question_id TEXT PRIMARY KEY,
+       question_json TEXT NOT NULL,
+       mastery INTEGER NOT NULL DEFAULT 0,
+       wrong_count INTEGER NOT NULL DEFAULT 1,
+       updated_at TEXT NOT NULL
+     )`
+  );
+  await db.execute(
+    `CREATE TABLE IF NOT EXISTS quiz_results (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       scope TEXT NOT NULL,
+       question_count INTEGER NOT NULL,
+       correct_count INTEGER NOT NULL,
+       created_at TEXT NOT NULL
+     )`
+  );
   for (const c of chapters) {
     await db.execute(
       "INSERT OR IGNORE INTO chapters (id, sort, title, description) VALUES (?, ?, ?, ?)",
@@ -70,6 +89,14 @@ export interface ProgressRow {
   status: string;
 }
 
+export interface MistakeRow {
+  question_id: string;
+  question_json: string;
+  mastery: number;
+  wrong_count: number;
+  updated_at: string;
+}
+
 export async function listChapters(): Promise<ChapterRow[]> {
   const db = await getDb();
   return db.select<ChapterRow[]>(
@@ -100,5 +127,63 @@ export async function setProgress(lessonId: string, status: string): Promise<voi
   await db.execute(
     "INSERT OR REPLACE INTO lesson_progress (lesson_id, status, updated_at) VALUES (?, ?, ?)",
     [lessonId, status, new Date().toISOString()]
+  );
+}
+
+export async function recordMistake(q: QuizQuestion): Promise<void> {
+  const db = await getDb();
+  await db.execute(
+    `INSERT INTO mistakes (question_id, question_json, mastery, wrong_count, updated_at)
+     VALUES (?, ?, 0, 1, ?)
+     ON CONFLICT(question_id) DO UPDATE SET
+       wrong_count = wrong_count + 1,
+       updated_at = excluded.updated_at`,
+    [q.id, JSON.stringify(q), new Date().toISOString()]
+  );
+}
+
+export async function setMistakeMastery(
+  questionId: string,
+  mastery: number
+): Promise<void> {
+  const db = await getDb();
+  await db.execute(
+    "UPDATE mistakes SET mastery = ?, updated_at = ? WHERE question_id = ?",
+    [mastery, new Date().toISOString(), questionId]
+  );
+}
+
+export async function deleteMistake(questionId: string): Promise<void> {
+  const db = await getDb();
+  await db.execute("DELETE FROM mistakes WHERE question_id = ?", [questionId]);
+}
+
+export async function listActiveMistakes(): Promise<MistakeRow[]> {
+  const db = await getDb();
+  return db.select<MistakeRow[]>(
+    "SELECT question_id, question_json, mastery, wrong_count, updated_at FROM mistakes WHERE mastery < 2 ORDER BY updated_at DESC"
+  );
+}
+
+export async function countMistakes(): Promise<{ active: number; total: number }> {
+  const db = await getDb();
+  const active = await db.select<{ c: number }[]>(
+    "SELECT COUNT(*) AS c FROM mistakes WHERE mastery < 2"
+  );
+  const total = await db.select<{ c: number }[]>(
+    "SELECT COUNT(*) AS c FROM mistakes"
+  );
+  return { active: active[0]?.c ?? 0, total: total[0]?.c ?? 0 };
+}
+
+export async function saveQuizResult(
+  scope: string,
+  total: number,
+  correct: number
+): Promise<void> {
+  const db = await getDb();
+  await db.execute(
+    "INSERT INTO quiz_results (scope, question_count, correct_count, created_at) VALUES (?, ?, ?, ?)",
+    [scope, total, correct, new Date().toISOString()]
   );
 }

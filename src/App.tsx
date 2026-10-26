@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { initDb } from "./db";
+import { QuizScope } from "./lib/quiz";
 import CoursesView from "./views/CoursesView";
 import LessonView from "./views/LessonView";
+import QuizView from "./views/QuizView";
+import QuizRunner from "./views/QuizRunner";
 import "./App.css";
 
 type View =
   | { name: "home" }
   | { name: "courses" }
   | { name: "lesson"; id: string }
+  | { name: "quiz" }
+  | { name: "quizRun"; scope: QuizScope; count: number }
   | { name: "stats" };
 
 function App() {
@@ -49,6 +54,14 @@ function App() {
             课程
           </button>
           <button
+            className={
+              view.name === "quiz" || view.name === "quizRun" ? "active" : ""
+            }
+            onClick={() => setView({ name: "quiz" })}
+          >
+            测试
+          </button>
+          <button
             className={view.name === "stats" ? "active" : ""}
             onClick={() => setView({ name: "stats" })}
           >
@@ -65,6 +78,16 @@ function App() {
           <CoursesView onOpenLesson={(id) => setView({ name: "lesson", id })} />
         ) : view.name === "lesson" ? (
           <LessonView lessonId={view.id} onBack={() => setView({ name: "courses" })} />
+        ) : view.name === "quiz" ? (
+          <QuizView
+            onStart={(scope, count) => setView({ name: "quizRun", scope, count })}
+          />
+        ) : view.name === "quizRun" ? (
+          <QuizRunner
+            scope={view.scope}
+            count={view.count}
+            onExit={() => setView({ name: "quiz" })}
+          />
         ) : (
           <StatsPlaceholder />
         )}
